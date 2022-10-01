@@ -11,7 +11,7 @@
  * Plugin Name:   Glacial Notifications
  * Plugin URI:    https://glacial.com
  * Description:   A simple plugin to add notifications to your site.
- * Version:       1.0.0
+ * Version:       1.0.1
  * Author:        Glacial Multimedia
  * Author URI:    https://glacial.com
  * Text Domain:   glacial-notifications
