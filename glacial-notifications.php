@@ -18,6 +18,8 @@
  * Domain Path:   /languages
  * License:       GPLv2
  * License URI:   https://www.gnu.org/licenses/gpl-2.0.html
+ * GitHub Plugin URI: https://github.com/Glacial-Web/glacial-notifications
+ * Primary Branch: develop
  */
 
 // Exit if accessed directly.
