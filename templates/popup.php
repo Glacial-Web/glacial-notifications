@@ -40,7 +40,7 @@ $data_props    = "data-props=$settings_json"; ?>
 				<?php echo $content; ?>
 
 				<?php if ( $button['text'] ):
-                    
+
 					$target = isset($button['target']) ? '_blank' : '_self'; ?>
 
                     <a href="<?php echo $button['url']; ?>" class="ui-button"
