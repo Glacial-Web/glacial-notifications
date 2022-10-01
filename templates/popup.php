@@ -19,13 +19,11 @@ $style   = 'style="background-color:' . $colors['background'] . '; color:' . $co
 $settings = array(
 	'cookie'          => $glacial_notifications_options['cookie']['cookie'] ?? 0,
 	'closed_duration' => $glacial_notifications_options['cookie']['closed_duration'] ?? 0,
-	'front_page_only' => $glacial_notifications_options['front_page_only'],
+	'front_page_only' => $glacial_notifications_options['front_page_only'] ?? 0,
 );
 
 $settings_json = json_encode( $settings );
-$data_props    = "data-props=$settings_json";
-
-?>
+$data_props    = "data-props=$settings_json"; ?>
 
 <div class="glacial-popup" id="glacialPopup" aria-hidden="true" <?php echo $data_props; ?>>
     <div class="glacial-popup-overlay" tabindex="-1" data-micromodal-close>

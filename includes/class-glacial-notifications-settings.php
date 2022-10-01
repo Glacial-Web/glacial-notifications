@@ -30,6 +30,7 @@ if ( ! class_exists( 'Glacial_Notifications_Settings' ) ) {
 
 			add_action( 'admin_menu', array( $this, 'glacial_notifications_add_plugin_page' ) );
 			add_action( 'admin_init', array( $this, 'glacial_notifications_page_init' ) );
+//            delete_option( 'glacial_notifications');
 		}
 
 		public static function getInstance() {
@@ -42,7 +43,16 @@ if ( ! class_exists( 'Glacial_Notifications_Settings' ) ) {
 
 		public function set_defaults() {
 			$defaults = array(
+				'status'    => 'active',
 				'placement' => 'sticky-header',
+				'content'   => '',
+				'button'    => array(
+					'text' => '',
+					'url'  => '',
+				),
+				'cookie'    => array(
+					'closed_duration' => '0',
+				),
 			);
 
 			return wp_parse_args( get_option( 'glacial_notifications' ), $defaults );
@@ -73,7 +83,7 @@ if ( ! class_exists( 'Glacial_Notifications_Settings' ) ) {
 					//					var_dump( $this->glacial_notifications );
 					settings_fields( 'glacial_notifications_option_group' );
 					do_settings_sections( 'glacial-notifications-settings-admin' );
-					submit_button('Save Settings');
+					submit_button( 'Save Settings' );
 					?>
 
                 </form>
@@ -193,20 +203,26 @@ if ( ! class_exists( 'Glacial_Notifications_Settings' ) ) {
 		public function glacial_notifications_section_info() {
 		}
 
-		public function status() { ?>
+		public function status() {
+			$checked = isset( $this->glacial_notifications['status'] ) ? 'checked' : '';
+
+			?>
             <label for="status">
                 <input type="checkbox" name="glacial_notifications[status]" id="status"
-                       value="active" <?php checked( 'active', $this->glacial_notifications['status'], true ); ?>>
+                       value="active" <?php echo $checked; ?>>
                 Enable Notification</label>
 
 
 		<?php }
 
-		public function front_page_only() { ?>
+		public function front_page_only() {
+			$checked = isset( $this->glacial_notifications['front_page_only'] ) ? 'checked' : '';
+
+			?>
             <label for="front_page_only">
                 <input type="checkbox" name="glacial_notifications[front_page_only]"
                        id="front_page_only"
-                       value="1" <?php checked( '1', $this->glacial_notifications['front_page_only'], true ); ?>>
+                       value="1" <?php echo $checked; ?>>
                 Show only on the front page / homepage</label>
 		<?php }
 
@@ -282,10 +298,12 @@ if ( ! class_exists( 'Glacial_Notifications_Settings' ) ) {
                                value="<?php echo $this->glacial_notifications['button']['url']; ?>">
                     </div>
                     <div>
+						<?php $checked = isset( $this->glacial_notifications['front_page_only'] ) ? 'checked' : ''; ?>
+
                         <label for="new-tab">
                             <input type="checkbox" name="glacial_notifications[button][target]"
                                    id="new-tab"
-                                   value="1" <?php checked( '1', $this->glacial_notifications['button']['target'], true ) ?>>Open
+                                   value="1" <?php echo $checked ?>>Open
                             in New Tab</label>
                     </div>
                 </div>
@@ -299,7 +317,7 @@ if ( ! class_exists( 'Glacial_Notifications_Settings' ) ) {
 
             <label for="cookie-0">
                 <input type="checkbox" name="glacial_notifications[cookie][cookie]" id="cookie-0"
-                       value="1" <?php checked( '1', $this->glacial_notifications['cookie']['cookie'], true ); ?>>Use
+                       value="1" <?php echo $checked ?>>Use
                 cookie</label>
             <br>
             <div id="cookie-length">
