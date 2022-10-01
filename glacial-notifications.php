@@ -5,7 +5,7 @@
  * @package       Glacial_Notifications
  * @author        Glacial Multimedia
  * @license       gplv2
- * @version       1.0.0
+ * @version       1.0.1
  *
  * @wordpress-plugin
  * Plugin Name:   Glacial Notifications
