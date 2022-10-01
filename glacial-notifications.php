@@ -33,7 +33,9 @@ define( 'GLACIAL_NOTIFICATIONS_PLUGIN_DIR', plugin_dir_path( GLACIAL_NOTIFICATIO
 define( 'GLACIAL_NOTIFICATIONS_PLUGIN_URL', plugin_dir_url( GLACIAL_NOTIFICATIONS_PLUGIN_FILE ) );
 
 if ( ! class_exists( 'Glacial_Notifications' ) ) {
+
 	class Glacial_Notifications {
+
 		/**
 		 * Static property to hold our singleton instance
 		 *
@@ -58,13 +60,11 @@ if ( ! class_exists( 'Glacial_Notifications' ) ) {
 			return self::$instance;
 		}
 
-        public function includes() {
-            require_once GLACIAL_NOTIFICATIONS_PLUGIN_DIR . 'includes/class-glacial-notifications-assets.php';
-            require_once GLACIAL_NOTIFICATIONS_PLUGIN_DIR . 'includes/class-glacial-notifications-settings.php';
-            require_once GLACIAL_NOTIFICATIONS_PLUGIN_DIR . 'includes/class-glacial-notifications-output.php';
-        }
-
-
+		public function includes() {
+			require_once GLACIAL_NOTIFICATIONS_PLUGIN_DIR . 'includes/class-glacial-notifications-assets.php';
+			require_once GLACIAL_NOTIFICATIONS_PLUGIN_DIR . 'includes/class-glacial-notifications-settings.php';
+			require_once GLACIAL_NOTIFICATIONS_PLUGIN_DIR . 'includes/class-glacial-notifications-output.php';
+		}
 
 	}
 }

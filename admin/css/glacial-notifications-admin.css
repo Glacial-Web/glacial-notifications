@@ -6,3 +6,36 @@ body#tinymce.wp-editor.content {
 body#tinymce.wp-editor a {
     color: #4CA6CF;
 }
+
+#cookie-length {
+    display: none;
+}
+
+.glacial-admin-flex {
+    display: flex;
+}
+
+.glacial-admin-flex > * {
+    flex: 1;
+}
+
+.glacial-admin-flex.align-end {
+    align-items: flex-end;
+}
+
+#button-url {
+    max-width:500px;
+    width: 95%;
+}
+
+#glacial-notifications-wrapper {
+    padding-bottom: 3em
+}
+
+#glacial-notifications-wrapper #submit {
+    font-size: 1.2em;
+    position: fixed;
+    bottom: 2em;
+    /* margin-top: 7em; */
+    margin-bottom: 1em;
+}

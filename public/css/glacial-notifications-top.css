@@ -1,4 +1,3 @@
-
 .gla-noti-pos-top.gla-noti-sticky {
     position: fixed;
     top: 0;
@@ -35,5 +34,24 @@
     width: 20px;
     height: 20px;
     color: #000;
-    float: right;
+}
+
+.gla-noti-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gla-noti-content * {
+    margin: 0;
+}
+
+.gla-noti-content a.ui-button {
+    margin:0 0 0 1em;
+}
+
+@media (max-width: 767px) {
+    .gla-noti-content {
+        flex-wrap: wrap;
+    }
 }

@@ -1,0 +1,111 @@
+.glacial-popup {
+    display: none;
+}
+
+.glacial-popup.is-open {
+    display: block;
+}
+
+.glacial-popup-overlay {
+    z-index: 9990;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.75);
+}
+
+.glacial-popup-container {
+    z-index: 9991;
+    position: relative;
+    box-sizing: border-box;
+    width: 95%;
+    overflow-y: auto;
+    max-width: 900px;
+    max-height: 100vh;
+    padding: 30px;
+    background-color: #fff;
+}
+
+.glacial-popup-close-button {
+    border: none;
+    padding: 20px;
+    background: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+/**************************\
+  Demo Animation Style
+\**************************/
+@keyframes mmfadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes mmfadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes mmslideIn {
+    from {
+        transform: translateY(15%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes mmslideOut {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-10%);
+    }
+}
+
+.glacial-popup[aria-hidden="false"] .glacial-popup-overlay {
+    animation: mmfadeIn .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+
+.glacial-popup[aria-hidden="false"] .glacial-popup-container {
+    animation: mmslideIn .3s cubic-bezier(0, 0, .2, 1);
+}
+
+.glacial-popup[aria-hidden="true"] .glacial-popup-overlay {
+    animation: mmfadeOut .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+
+.glacial-popup[aria-hidden="true"] .glacial-popup-container {
+    animation: mmslideOut .3s cubic-bezier(0, 0, .2, 1);
+}
+
+.glacial-popup .glacial-popup-container,
+.glacial-popup .glacial-popup-overlay {
+    will-change: transform;
+}
+
+.gla-noti-close-icon {
+    width: 20px;
+    height: 20px;
+    color: #000;
+}
+
+button[data-micromodal-close] > .gla-noti-close-icon {
+    pointer-events: none;
+}
