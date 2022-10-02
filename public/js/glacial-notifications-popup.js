@@ -8,7 +8,6 @@
             const props = $('#glacialPopup').data('props');
 
             function show_popup() {
-
                 MicroModal.show(glacialPopupID, {
                     onClose: set_cookie,
                     openTrigger: 'data-micromodal-open',
@@ -58,7 +57,13 @@
             }
 
             if (has_cookie(cookie_name) === false) {
-                show_popup();
+                if (props.show_after_duration == '0') {
+                    show_popup();
+                } else {
+                    setTimeout(function () {
+                        show_popup();
+                    }, props.show_after_duration * 1000);
+                }
             }
 
             $('#glacialPopup a').on('click', function () {

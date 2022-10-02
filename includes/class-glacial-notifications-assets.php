@@ -78,7 +78,7 @@ if ( ! class_exists( 'Glacial_Notifications_Assets' ) ) {
 						wp_enqueue_style( 'glacial-notifications-style', GLACIAL_NOTIFICATIONS_PLUGIN_URL . 'public/css/glacial-notifications-top.css', array(), GLACIAL_NOTIFICATIONS_VERSION, 'all' );
 						wp_enqueue_script( 'glacial-notifications-script', GLACIAL_NOTIFICATIONS_PLUGIN_URL . 'public/js/glacial-notifications-top.js', array( 'jquery' ), GLACIAL_NOTIFICATIONS_VERSION, true );
 					} else {
-						wp_enqueue_script( 'glacial-notification-popup', 'https://unpkg.com/micromodal/dist/micromodal.min.js', array(), GLACIAL_NOTIFICATIONS_VERSION, true );
+						wp_enqueue_script( 'glacial-notification-popup', 'https://unpkg.com/micromodal/dist/micromodal.min.js', array(), null, true );
 						wp_enqueue_style( 'glacial-notifications-style', GLACIAL_NOTIFICATIONS_PLUGIN_URL . 'public/css/glacial-notifications-popup.css', array(), GLACIAL_NOTIFICATIONS_VERSION, 'all' );
 						wp_enqueue_script( 'glacial-notifications-script', GLACIAL_NOTIFICATIONS_PLUGIN_URL . 'public/js/glacial-notifications-popup.js', array(
 							'jquery',

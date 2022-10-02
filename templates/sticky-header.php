@@ -18,6 +18,7 @@ $closed_duration = $glacial_notifications_options['cookie']['closed_duration'] ?
 $colors          = $glacial_notifications_options['colors'];
 $style           = 'style="background-color:' . $colors['background'] . '; color:' . $colors['text'] . '"';
 
+unset( $glacial_notifications_options['colors'] );
 unset( $glacial_notifications_options['cookie'] );
 unset( $glacial_notifications_options['content'] );
 unset( $glacial_notifications_options['button'] );
@@ -26,8 +27,8 @@ unset( $glacial_notifications_options['front_page_only'] );
 $defaults = array(
 	'status'              => 'active',
 	'display'             => 'immediate',
-	'show_on'             => 'page_open',
-	'show_after_duration' => '0',
+    //
+	'show_after_duration' => '0', // 0 = immediate, 1 = 1 second, etc. TODO add option for show_after_duration
 	'open_animation'      => 'slide',
 	'position'            => 'top',
 	'sticky'              => 'yes',

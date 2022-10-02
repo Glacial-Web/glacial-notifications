@@ -1,3 +1,8 @@
+
+.glacial-top-spacer {
+    transition: 0.1s;
+    height: 0;
+}
 .gla-noti-pos-top.gla-noti-sticky {
     position: fixed;
     top: 0;
@@ -7,7 +12,6 @@
 
 }
 
-
 .gla-noti {
     z-index: 9999;
     display: none;
@@ -15,7 +19,7 @@
     width: 100%;
     background-color: red;
     box-sizing: border-box;
-    padding: 0.5em 1em;
+    padding: 1em;
     border-left-width: 0 !important;
     border-right-width: 0 !important;
 }

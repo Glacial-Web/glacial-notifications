@@ -66,6 +66,7 @@ if ( ! class_exists( 'Glacial_Notifications' ) ) {
 			require_once GLACIAL_NOTIFICATIONS_PLUGIN_DIR . 'includes/class-glacial-notifications-assets.php';
 			require_once GLACIAL_NOTIFICATIONS_PLUGIN_DIR . 'includes/class-glacial-notifications-settings.php';
 			require_once GLACIAL_NOTIFICATIONS_PLUGIN_DIR . 'includes/class-glacial-notifications-output.php';
+			require_once GLACIAL_NOTIFICATIONS_PLUGIN_DIR . 'includes/helpers.php';
 		}
 
 	}

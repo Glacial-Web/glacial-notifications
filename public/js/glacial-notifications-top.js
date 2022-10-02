@@ -42,7 +42,6 @@ GlaNoti_State.prototype.add = function (bar) {
         this[position].sticky_group = jQuery(position_class + '.gla-noti-sticky');
     }
 
-
     if (bar.props.show_on == 'page_scroll') {
         this.on_scroll_bars.push(bar);
     }
@@ -248,9 +247,9 @@ GlaNoti.prototype.check_show = function () {
         return;
     }
 
-    if (this.props.show_on == 'page_open') {
+    if (this.props.show_after_duration == '0') {
         self.show();
-    } else if (this.props.show_on == 'duration') {
+    } else  {
         setTimeout(function () {
             self.show();
         }, this.props.show_after_duration * 1000)
