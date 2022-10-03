@@ -1,4 +1,8 @@
 
+.glacial-top-spacer {
+    transition: 0.1s;
+    height: 0;
+}
 .gla-noti-pos-top.gla-noti-sticky {
     position: fixed;
     top: 0;
@@ -8,7 +12,6 @@
 
 }
 
-
 .gla-noti {
     z-index: 9999;
     display: none;
@@ -16,7 +19,7 @@
     width: 100%;
     background-color: red;
     box-sizing: border-box;
-    padding: 0.5em 1em;
+    padding: 1em;
     border-left-width: 0 !important;
     border-right-width: 0 !important;
 }
@@ -35,5 +38,24 @@
     width: 20px;
     height: 20px;
     color: #000;
-    float: right;
+}
+
+.gla-noti-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gla-noti-content * {
+    margin: 0;
+}
+
+.gla-noti-content a.ui-button {
+    margin:0 0 0 1em;
+}
+
+@media (max-width: 767px) {
+    .gla-noti-content {
+        flex-wrap: wrap;
+    }
 }

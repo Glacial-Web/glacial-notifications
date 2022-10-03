@@ -8,9 +8,10 @@ Backend related javascript
 
     $(document).ready(function () {
 
+        const $cookie = $('#cookie-0');
+        const $cookie_length = $('#cookie-length');
+
         function checkRadio() {
-            let $cookie = $('#cookie-0');
-            let $cookie_length = $('#cookie-length');
             if ($cookie.is(':checked')) {
                 $cookie_length.show();
             } else {
@@ -20,23 +21,21 @@ Backend related javascript
         }
 
         checkRadio();
-        $('#cookie-radios input').on('click', function () {
-           checkRadio();
+
+        $cookie.on('click', function () {
+            checkRadio();
         });
 
-        /*	$.ajax({
-                type : "post",
-                dataType : "json",
-                url : glanotifications.ajaxurl,
-                data : {
-                    action: "my_demo_ajax_call",
-                    demo_data : 'test_data',
-                    ajax_nonce_parameter: glanotifications.security_nonce
-                },
-                success: function(response) {
-                    console.log( response );
-                }
-            });*/
+        $('.glacial-color-field').wpColorPicker({
+                width: 300,
+                clear: false,
+                palettes: true,
+
+
+
+            }
+        );
+
     });
 
 })(jQuery);

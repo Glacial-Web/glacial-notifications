@@ -23,13 +23,17 @@ if ( ! class_exists( 'Glacial_Notifications_Output' ) ) {
 		 */
 		private $options;
 
+		private $active;
+
+		private $front_page_only;
+
 		private function __construct() {
 
-			$this->options = get_option( 'glacial_notifications' );
+			$this->options         = get_option( 'glacial_notifications' );
+			$this->active          = $this->options['status'] ?? false;
+			$this->front_page_only = $this->options['front_page_only'] ?? false;
 
-			if ( isset( $this->options['status']) && $this->options['status'] == 'active' ) {
-				add_action( 'wp_footer', array( $this, 'get_template' ) );
-			}
+			add_action( 'wp_footer', array( $this, 'get_template' ) );
 		}
 
 		public static function getInstance() {
@@ -40,20 +44,47 @@ if ( ! class_exists( 'Glacial_Notifications_Output' ) ) {
 			return self::$instance;
 		}
 
+		public function is_active() {
+
+			if ( $this->active ) {
+
+				/*
+				 * If front page only is set to true, only show the notification on the front page.
+				 * */
+				if ( is_front_page() && $this->front_page_only ) {
+					return true;
+				}
+
+				/*
+				 * If front page is not the only page to show the notification
+				 * */
+				if ( ! $this->front_page_only ) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
 		public function get_template() {
 
-			$placement = $this->options['placement'];
+			if ( $this->is_active() ) {
 
-			if ( $placement == 'sticky-header' ) {
-				include GLACIAL_NOTIFICATIONS_PLUGIN_DIR . 'templates/sticky-header.php';
-			} else {
-				include GLACIAL_NOTIFICATIONS_PLUGIN_DIR . 'templates/popup.php';
+
+				$placement = $this->options['placement'];
+
+				if ( $placement == 'sticky-header' ) {
+					include GLACIAL_NOTIFICATIONS_PLUGIN_DIR . 'templates/sticky-header.php';
+				} else {
+					include GLACIAL_NOTIFICATIONS_PLUGIN_DIR . 'templates/popup.php';
+				}
 			}
 
 
 		}
 
-		public function output() {
+		public
+		function output() {
 		}
 
 	}

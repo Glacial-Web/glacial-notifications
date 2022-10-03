@@ -3,13 +3,14 @@
     $(document).ready(function () {
         $('.gla-noti').each(function () {
             let $notification = $(this);
-            this.announcer = new GlaNoti($notification);
+            this.notification = new GlaNoti($notification);
         });
     });
 
 })(jQuery);
 
 function GlaNoti_Position() {
+
     this.spacer = false;
     this.normal_moved = false;
 
@@ -30,8 +31,8 @@ function GlaNoti_State() {
 }
 
 GlaNoti_State.prototype.add = function (bar) {
-    let position = bar.props.position;
 
+    let position = bar.props.position;
     let position_class = '.gla-noti-pos-top';
 
     this.bars.push(bar);
@@ -41,10 +42,11 @@ GlaNoti_State.prototype.add = function (bar) {
         this[position].sticky_group = jQuery(position_class + '.gla-noti-sticky');
     }
 
-
     if (bar.props.show_on == 'page_scroll') {
         this.on_scroll_bars.push(bar);
     }
+
+
 }
 
 GlaNoti_State.prototype.add_spacer = function (position) {
@@ -65,7 +67,6 @@ GlaNoti_State.prototype.update_offsets = function (position) {
     if (this[position].sticky_group) {
         this[position].sticky_offset = this[position].sticky_group.outerHeight();
         this[position].spacer.height(this[position].sticky_offset);
-
     }
 
 }
@@ -78,7 +79,7 @@ GlaNoti_State.prototype.set_cookie = function (name, value, expiry_days, site_wi
     if (expiry_days) {
         let date = new Date();
         date.setTime(date.getTime() + (expiry_days * 24 * 60 * 60 * 1000));
-        expires = "; expires=" + date.toGMTString();
+        expires = "; expires=" + date.toUTCString();
     }
 
     document.cookie = name + '=' + value + expires + path;
@@ -185,6 +186,11 @@ function GlaNoti($el) {
     this.register_events();
     this.check_show();
 
+    if (this.props.cookie === 0) {
+        document.cookie = this.close_cookie + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    }
+
+
 }
 
 GlaNoti.prototype.register_events = function () {
@@ -193,7 +199,7 @@ GlaNoti.prototype.register_events = function () {
     let $close_btn = this.$el.find('.gla-noti-close-button');
 
     if (this.props.close_content_click == 'yes') {
-        $close_btn = $close_btn.add(this.$el.find('.gla-noti-inner a'));
+        $close_btn = $close_btn.add(this.$el.find('a'));
     }
 
     if ($close_btn.length != 0) {
@@ -228,7 +234,7 @@ GlaNoti.prototype.can_show = function () {
         return false;
     }
 
-    if (this.props.cookie == 'yes' && closed_cookie) {
+    if (this.props.cookie == '1' && closed_cookie) {
         return false;
     }
 
@@ -248,9 +254,9 @@ GlaNoti.prototype.check_show = function () {
         return;
     }
 
-    if (this.props.show_on == 'page_open') {
+    if (this.props.show_after_duration == '0') {
         self.show();
-    } else if (this.props.show_on == 'duration') {
+    } else {
         setTimeout(function () {
             self.show();
         }, this.props.show_after_duration * 1000)
@@ -280,6 +286,7 @@ GlaNoti.prototype.after_show = function () {
 }
 
 GlaNoti.prototype.hide = function (set_cookie = true) {
+
     let self = this;
     this.is_shown = false;
 
@@ -296,7 +303,7 @@ GlaNoti.prototype.after_hide = function (set_cookie = true) {
 
     let closed_duration = (this.props.closed_duration == '0') ? false : this.props.closed_duration;
 
-    if (this.props.cookie == 'yes' && set_cookie) {
+    if (this.props.cookie == '1' && set_cookie) {
         glanoti_state.set_cookie(this.close_cookie, 1, closed_duration, true);
     }
 
