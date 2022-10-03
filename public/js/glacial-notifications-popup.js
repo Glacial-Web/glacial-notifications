@@ -36,6 +36,8 @@
                     }
 
                     document.cookie = cookie_name + '=' + value + expires + path;
+                } else {
+                    document.cookie = cookie_name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
                 }
             }
 
@@ -70,8 +72,29 @@
                 MicroModal.close(glacialPopupID)
             });
 
+            /*    function onRemoved(cookie) {
+                    console.log(`Removed: ${cookie}`);
+                }
+
+                function onError(error) {
+                    console.log(`Error removing cookie: ${error}`);
+                }
+
+                function removeCookie(tabs) {
+                    let removing = browser.cookies.remove({
+                        url: tabs[0].url,
+                        name: "glacial_notification_closed"
+                    });
+                    removing.then(onRemoved, onError);
+                }
+
+                let getActive = browser.tabs.query({active: true, currentWindow: true});
+                getActive.then(removeCookie);*/
+
         }
 
     });
 
 })(jQuery);
+
+// let getActive = browser.tabs.query({active: true, currentWindow: true});

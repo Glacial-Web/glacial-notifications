@@ -27,11 +27,8 @@ unset( $glacial_notifications_options['front_page_only'] );
 $defaults = array(
 	'status'              => 'active',
 	'display'             => 'immediate',
-    //
-	'show_after_duration' => '0', // 0 = immediate, 1 = 1 second, etc. TODO add option for show_after_duration
 	'open_animation'      => 'slide',
 	'position'            => 'top',
-	'sticky'              => 'yes',
 	'close_animation'     => 'fade',
 	'close_content_click' => 'yes',
 	'auto_close'          => '0',
@@ -58,7 +55,7 @@ $data_props    = "data-props=$settings_json"; ?>
 			echo $content;
 
 			if ( $button['text'] ):
-				$target = isset($button['target']) ? '_blank' : '_self'; ?>
+				$target = isset( $button['target'] ) ? '_blank' : '_self'; ?>
 
                 <a href="<?php echo $button['url']; ?>" class="ui-button"
                    target="<?php echo $target; ?>"><?php echo $button['text']; ?></a>

@@ -43,12 +43,11 @@ if ( ! class_exists( 'Glacial_Notifications_Settings' ) ) {
 
 		public function set_defaults() {
 			$defaults = array(
-				'status'    => 'active',
 				'placement' => 'sticky-header',
-				'content'   => '',
+				'content'   => '<h2>See our special offers!</h2>',
 				'button'    => array(
-					'text' => '',
-					'url'  => '',
+					'text' => 'Learn More',
+					'url'  => 'https://glacial.com',
 				),
 				'cookie'    => array(
 					'closed_duration' => '0',
@@ -80,7 +79,7 @@ if ( ! class_exists( 'Glacial_Notifications_Settings' ) ) {
                 <form method="post" action="options.php">
 
 					<?php
-					//					var_dump( $this->glacial_notifications );
+//					var_dump( $this->glacial_notifications );
 					settings_fields( 'glacial_notifications_option_group' );
 					do_settings_sections( 'glacial-notifications-settings-admin' );
 					submit_button( 'Save Settings' );
@@ -92,63 +91,71 @@ if ( ! class_exists( 'Glacial_Notifications_Settings' ) ) {
 
 		public function glacial_notifications_page_init() {
 			register_setting(
-				'glacial_notifications_option_group', // option_group
-				'glacial_notifications', //
-				array( $this, 'glacial_notifications_sanitize' ) // sanitize_callback
+				'glacial_notifications_option_group',
+				'glacial_notifications',
+				array( $this, 'glacial_notifications_sanitize' )
 			);
 
 			add_settings_section(
-				'glacial_notifications_setting_section', // id
-				'', // title
-				array( $this, 'glacial_notifications_section_info' ), // callback
-				'glacial-notifications-settings-admin' // page
+				'glacial_notifications_setting_section',
+				'',
+				array( $this, 'glacial_notifications_section_info' ),
+				'glacial-notifications-settings-admin'
 			);
 
 			add_settings_field(
-				'status', // id
-				'Enable Notification', // title
-				array( $this, 'status' ), // callback
-				'glacial-notifications-settings-admin', // page
-				'glacial_notifications_setting_section' // section
+				'status',
+				'Enable Notification',
+				array( $this, 'status' ),
+				'glacial-notifications-settings-admin',
+				'glacial_notifications_setting_section'
 			);
 
 			add_settings_field(
-				'front_page_only', // id
-				'Front Page Only', // title
-				array( $this, 'front_page_only' ), // callback
-				'glacial-notifications-settings-admin', // page
-				'glacial_notifications_setting_section' // section
+				'front_page_only',
+				'Front Page Only',
+				array( $this, 'front_page_only' ),
+				'glacial-notifications-settings-admin',
+				'glacial_notifications_setting_section'
 			);
 
 			add_settings_field(
-				'placement', // id
-				'Placement', // title
-				array( $this, 'placement_callback' ), // callback
-				'glacial-notifications-settings-admin', // page
+				'placement',
+				'Placement',
+				array( $this, 'placement_callback' ),
+				'glacial-notifications-settings-admin',
 				'glacial_notifications_setting_section',
 			);
 
 			add_settings_field(
-				'content', // id
-				'Content', // title
-				array( $this, 'content_callback' ), // callback
-				'glacial-notifications-settings-admin', // page
-				'glacial_notifications_setting_section' // section
+				'show_after_duration',
+				'Show After',
+				array( $this, 'show_after_duration_callback' ),
+				'glacial-notifications-settings-admin',
+				'glacial_notifications_setting_section',
 			);
 
 			add_settings_field(
-				'colors', // id
-				'Colors', // title
-				array( $this, 'colors_callback' ), // callback
-				'glacial-notifications-settings-admin', // page
-				'glacial_notifications_setting_section' // section
+				'content',
+				'Content',
+				array( $this, 'content_callback' ),
+				'glacial-notifications-settings-admin',
+				'glacial_notifications_setting_section'
 			);
 
 			add_settings_field(
-				'button', // id
-				'Button', // title
-				array( $this, 'button_callback' ), // callback
-				'glacial-notifications-settings-admin', // page
+				'colors',
+				'Colors',
+				array( $this, 'colors_callback' ),
+				'glacial-notifications-settings-admin',
+				'glacial_notifications_setting_section'
+			);
+
+			add_settings_field(
+				'button',
+				'Button',
+				array( $this, 'button_callback' ),
+				'glacial-notifications-settings-admin',
 				'glacial_notifications_setting_section',
 				array(
 					'class' => 'glacial-notifications-group'
@@ -156,29 +163,35 @@ if ( ! class_exists( 'Glacial_Notifications_Settings' ) ) {
 			);
 
 			add_settings_field(
-				'cookie', // id
-				'Cookie', // title
-				array( $this, 'cookie' ), // callback
-				'glacial-notifications-settings-admin', // page
-				'glacial_notifications_setting_section' // section
+				'cookie',
+				'Cookie',
+				array( $this, 'cookie' ),
+				'glacial-notifications-settings-admin',
+				'glacial_notifications_setting_section'
 			);
 
 		}
 
 		public function glacial_notifications_sanitize( $input ) {
+
 			$sanitary_values = array();
 
 			if ( isset( $input['status'] ) ) {
-				$sanitary_values['status'] = $input['status'];
+				$sanitary_values['status'] = sanitize_text_field( $input['status'] );
 			}
 
 			if ( isset( $input['front_page_only'] ) ) {
-				$sanitary_values['front_page_only'] = $input['front_page_only'];
+				$sanitary_values['front_page_only'] = sanitize_text_field( $input['front_page_only'] );
 			}
 
 			if ( isset( $input['placement'] ) ) {
-				$sanitary_values['placement'] = $input['placement'];
+				$sanitary_values['placement'] = sanitize_text_field( $input['placement'] );
 			}
+
+			if ( isset( $input['show_after_duration'] ) ) {
+				$sanitary_values['show_after_duration'] = filter_var( $input['show_after_duration'], FILTER_VALIDATE_INT, );
+			}
+
 
 			if ( isset( $input['content'] ) ) {
 				$sanitary_values['content'] = $input['content'];
@@ -246,6 +259,14 @@ if ( ! class_exists( 'Glacial_Notifications_Settings' ) ) {
                            id="placement-1" value="popup" <?php echo $checked; ?>>Popup/Modal</label>
             </fieldset>
 		<?php }
+
+		public function show_after_duration_callback() {
+			printf(
+				'<input type="number" name="glacial_notifications[show_after_duration]" value="%s" min="0" max="30">',
+				isset( $this->glacial_notifications['show_after_duration'] ) ? esc_attr( $this->glacial_notifications['show_after_duration'] ) : '0'
+			);
+			echo '<p>Seconds to delay showing notification. 0 for immediately.</p>';
+		}
 
 		public function content_callback() {
 
@@ -329,14 +350,6 @@ if ( ! class_exists( 'Glacial_Notifications_Settings' ) ) {
 				echo '<p>Number of days to keep the notification closed. 0 for session.</p>'; ?>
             </div>
 		<?php }
-
-		/*public function cookie_length() {
-			printf(
-				'<input type="number" name="glacial_notifications[closed_duration]" id="cookie-length" value="%s" min="0" max="99">',
-				isset( $this->glacial_notifications['closed_duration'] ) ? esc_attr( $this->glacial_notifications['closed_duration'] ) : '0'
-			);
-			echo '<p>Number of days to keep the notification closed. 0 for session.</p>';
-		}*/
 
 		/**
 		 * @param bool $base64

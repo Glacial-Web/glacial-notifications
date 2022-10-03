@@ -17,7 +17,7 @@ $colors  = $glacial_notifications_options['colors'];
 $style   = 'style="background-color:' . $colors['background'] . '; color:' . $colors['text'] . '"';
 
 $settings = array(
-	'show_after_duration' => '0', // 0 = immediate, 1 = 1 second, etc. @todo add option for show_after_duration
+	'show_after_duration' => $glacial_notifications_options['show_after_duration'],
 	'cookie'              => $glacial_notifications_options['cookie']['cookie'] ?? 0,
 	'closed_duration'     => $glacial_notifications_options['cookie']['closed_duration'] ?? 0,
 	'front_page_only'     => $glacial_notifications_options['front_page_only'] ?? 0,
@@ -41,12 +41,11 @@ $data_props    = "data-props=$settings_json"; ?>
 				<?php echo $content; ?>
 
 				<?php if ( $button['text'] ):
-
 					$target = isset( $button['target'] ) ? '_blank' : '_self'; ?>
-
-                    <a href="<?php echo $button['url']; ?>" class="ui-button"
-                       target="<?php echo $target; ?>"><?php echo $button['text']; ?></a>
-
+                    <div class="button-container">
+                        <a href="<?php echo $button['url']; ?>" class="ui-button"
+                           target="<?php echo $target; ?>"><?php echo $button['text']; ?></a>
+                    </div>
 				<?php endif; ?>
             </div>
         </div>

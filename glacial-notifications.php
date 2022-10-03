@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 define( 'GLACIAL_NOTIFICATIONS_NAME', 'Glacial Notifications' );
 define( 'GLACIAL_NOTIFICATIONS_VERSION', '1.0.0' );
-define( 'GLACIAL_NOTIFICATIONS_ASSET_VERSION', time() );
+define( 'GLACIAL_NOTIFICATIONS_ASSET_VERSION', null );
 define( 'GLACIAL_NOTIFICATIONS_PLUGIN_FILE', __FILE__ );
 define( 'GLACIAL_NOTIFICATIONS_PLUGIN_DIR', plugin_dir_path( GLACIAL_NOTIFICATIONS_PLUGIN_FILE ) );
 define( 'GLACIAL_NOTIFICATIONS_PLUGIN_URL', plugin_dir_url( GLACIAL_NOTIFICATIONS_PLUGIN_FILE ) );
@@ -45,8 +45,6 @@ if ( ! class_exists( 'Glacial_Notifications' ) ) {
 		static $instance = false;
 
 		/**
-		 * This is our constructor
-		 *
 		 * @return void
 		 */
 		private function __construct() {

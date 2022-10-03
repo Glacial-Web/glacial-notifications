@@ -25,7 +25,7 @@
     box-sizing: border-box;
     width: 95%;
     overflow-y: auto;
-    max-width: 900px;
+    max-width: 1000px;
     max-height: 100vh;
     padding: 30px;
     background-color: #fff;
@@ -38,6 +38,18 @@
     position: absolute;
     right: 0;
     top: 0;
+}
+
+.glacial-popup-content a.ui-button {
+    margin: 2em auto 0 auto;
+    font-size: 1.2em;
+}
+
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
 
 /**************************\

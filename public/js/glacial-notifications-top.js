@@ -45,6 +45,8 @@ GlaNoti_State.prototype.add = function (bar) {
     if (bar.props.show_on == 'page_scroll') {
         this.on_scroll_bars.push(bar);
     }
+
+
 }
 
 GlaNoti_State.prototype.add_spacer = function (position) {
@@ -184,6 +186,11 @@ function GlaNoti($el) {
     this.register_events();
     this.check_show();
 
+    if (this.props.cookie === 0) {
+        document.cookie = this.close_cookie + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    }
+
+
 }
 
 GlaNoti.prototype.register_events = function () {
@@ -249,7 +256,7 @@ GlaNoti.prototype.check_show = function () {
 
     if (this.props.show_after_duration == '0') {
         self.show();
-    } else  {
+    } else {
         setTimeout(function () {
             self.show();
         }, this.props.show_after_duration * 1000)
